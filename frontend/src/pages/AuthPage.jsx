@@ -125,9 +125,9 @@ export function AuthPage() {
               <input
                 name="password"
                 type="password"
-                minLength={8}
+                {...(mode === 'signup' ? { minLength: 8 } : {})}
                 required
-                placeholder="At least 8 characters"
+                placeholder={mode === 'signup' ? 'At least 8 characters' : 'Your password'}
                 autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
               />
             </label>
