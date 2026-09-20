@@ -1,0 +1,6 @@
+/* Central Stylesheet - imports modular stylesheets */
+@import './variables.css';
+@import './base.css';
+@import './auth.css';
+@import './dashboard.css';
+@import './admin.css';

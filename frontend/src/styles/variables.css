@@ -1,0 +1,50 @@
+:root {
+  /* Color Palette */
+  --color-primary: #195b43;
+  --color-primary-hover: #123f30;
+  --color-primary-dark: #15523d;
+  --color-primary-light: #edf6ef;
+  --color-primary-border: #cce0d0;
+
+  --color-bg: #f8f8f3;
+  --color-surface: #ffffff;
+  --color-border: #e1e7e1;
+  --color-border-light: #edf0ed;
+  --color-text-main: #182a24;
+  --color-text-muted: #64746d;
+  --color-text-subtle: #73827c;
+  --color-eyebrow: #237457;
+
+  /* Status Colors */
+  --color-status-received-bg: #f1eee6;
+  --color-status-received-text: #76613a;
+  --color-status-confirmed-bg: #e3eef9;
+  --color-status-confirmed-text: #276394;
+  --color-status-doing-bg: #f8e6cc;
+  --color-status-doing-text: #9a5912;
+  --color-status-done-bg: #dff1e5;
+  --color-status-done-text: #27734c;
+  --color-status-delivered-bg: #d9ece5;
+  --color-status-delivered-text: #15523d;
+
+  --color-error: #b3261e;
+  --color-accent-amber: #df9c36;
+
+  /* Ratings & Glow */
+  --color-gold: #f59e0b;
+  --color-gold-hover: #d97706;
+  --color-gold-light: #fef3c7;
+  --color-gold-glow: rgba(245, 158, 11, 0.25);
+
+  /* Typography */
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-mono: 'DM Mono', monospace;
+
+  /* Shadows & Transitions */
+  --shadow-sm: 0 2px 8px rgba(21, 60, 41, 0.06);
+  --shadow-md: 0 4px 16px rgba(21, 60, 41, 0.08);
+  --shadow-card: 0 3px 14px rgba(21, 60, 41, 0.06);
+  --shadow-dialog: 0 12px 36px rgba(21, 60, 41, 0.12);
+  --transition-fast: 0.15s ease;
+}
