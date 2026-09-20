@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuth } from './context/AuthContext';
 import { AuthPage } from './pages/AuthPage';
 import { StudentDashboard } from './pages/StudentDashboard';
@@ -7,7 +7,16 @@ import { LoadingScreen } from './components/common/LoadingScreen';
 
 export function App() {
   const { user, loading } = useAuth();
-  const [view, setView] = useState(() => (user?.is_staff ? 'admin' : 'projects'));
+  const [view, setView] = useState('projects');
+
+  // Ensure view defaults to 'admin' whenever a staff member logs in
+  useEffect(() => {
+    if (user?.is_staff) {
+      setView('admin');
+    } else if (user) {
+      setView('projects');
+    }
+  }, [user]);
 
   if (loading) {
     return <LoadingScreen message="Initializing College Circuit…" />;
@@ -17,11 +26,11 @@ export function App() {
     return <AuthPage />;
   }
 
-  // If user is staff and viewing admin
-  if (view === 'admin' && user.is_staff) {
+  // Admins always go to Admin Workspace
+  if (user.is_staff) {
     return <AdminDashboard currentView={view} setView={setView} />;
   }
 
-  // Standard student dashboard (and student view for staff when toggled)
+  // Regular students dashboard
   return <StudentDashboard currentView={view} setView={setView} />;
 }
