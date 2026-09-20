@@ -241,8 +241,31 @@
   }
   .admin-grid {
     grid-template-columns: 1fr;
+    min-width: 0;
   }
   .detail {
     position: static;
+  }
+  .requests,
+  .detail {
+    min-width: 0;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  .requestrow {
+    min-width: 0;
+    max-width: 100%;
+  }
+  .requestrow > div:first-child {
+    min-width: 0;
+    overflow: hidden;
+  }
+  .requestrow b,
+  .requestrow small,
+  .contact a,
+  .contact span {
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
 }

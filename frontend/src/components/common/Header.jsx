@@ -25,30 +25,32 @@ export function Header({ user, currentView, onNavigate, onLogout }) {
 
   return (
     <header>
-      <a className="logo" onClick={() => navigate('projects')}>
+      <a className="logo" onClick={() => navigate(user?.is_staff ? 'admin' : 'projects')}>
         <span>◉</span> College Circuit
       </a>
 
       {/* Desktop nav — hidden on mobile via CSS */}
       <nav className="mainnav">
-        <button
-          className={currentView === 'projects' ? 'active' : ''}
-          onClick={() => navigate('projects')}
-        >
-          My Projects
-        </button>
-
-        <button className="requestnav" onClick={() => navigate('new')}>
-          + New Request
-        </button>
-
-        {user?.is_staff && (
+        {user?.is_staff ? (
           <button
             className={currentView === 'admin' ? 'active' : ''}
             onClick={() => navigate('admin')}
           >
-            Admin Workspace
+            ⚙ Admin Workspace
           </button>
+        ) : (
+          <>
+            <button
+              className={currentView === 'projects' ? 'active' : ''}
+              onClick={() => navigate('projects')}
+            >
+              My Projects
+            </button>
+
+            <button className="requestnav" onClick={() => navigate('new')}>
+              + New Request
+            </button>
+          </>
         )}
       </nav>
 
@@ -77,27 +79,29 @@ export function Header({ user, currentView, onNavigate, onLogout }) {
       {/* Mobile dropdown menu */}
       {mobileMenuOpen && (
         <div className="mobile-menu" ref={menuRef}>
-          <button
-            className={`mobile-nav-btn ${currentView === 'projects' ? 'active' : ''}`}
-            onClick={() => navigate('projects')}
-          >
-            📁 My Projects
-          </button>
-
-          <button
-            className="mobile-nav-btn highlight"
-            onClick={() => navigate('new')}
-          >
-            ＋ New Request
-          </button>
-
-          {user?.is_staff && (
+          {user?.is_staff ? (
             <button
               className={`mobile-nav-btn admin-nav-btn ${currentView === 'admin' ? 'active' : ''}`}
               onClick={() => navigate('admin')}
             >
               ⚙ Admin Workspace
             </button>
+          ) : (
+            <>
+              <button
+                className={`mobile-nav-btn ${currentView === 'projects' ? 'active' : ''}`}
+                onClick={() => navigate('projects')}
+              >
+                📁 My Projects
+              </button>
+
+              <button
+                className="mobile-nav-btn highlight"
+                onClick={() => navigate('new')}
+              >
+                ＋ New Request
+              </button>
+            </>
           )}
 
           <div className="mobile-menu-divider" />
