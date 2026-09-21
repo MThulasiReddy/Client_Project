@@ -1,50 +1,57 @@
 :root {
-  /* Color Palette */
-  --color-primary: #195b43;
-  --color-primary-hover: #123f30;
-  --color-primary-dark: #15523d;
-  --color-primary-light: #edf6ef;
-  --color-primary-border: #cce0d0;
+  /* Ultra-Professional Brand & Accent Palette */
+  --color-primary: #0f766e;           /* Deep teal / enterprise professional */
+  --color-primary-hover: #115e59;
+  --color-primary-dark: #134e4a;
+  --color-primary-light: #f0fdfa;
+  --color-primary-border: #99f6e4;
+  --color-primary-glow: rgba(15, 118, 110, 0.16);
 
-  --color-bg: #f8f8f3;
+  /* Modern Crisp Clean Backgrounds */
+  --color-bg: #f8fafc;                /* Crisp clean slate background */
   --color-surface: #ffffff;
-  --color-border: #e1e7e1;
-  --color-border-light: #edf0ed;
-  --color-text-main: #182a24;
-  --color-text-muted: #64746d;
-  --color-text-subtle: #73827c;
-  --color-eyebrow: #237457;
+  --color-surface-subtle: #f1f5f9;
+  --color-border: #e2e8f0;
+  --color-border-light: #f1f5f9;
+  --color-border-hover: #cbd5e1;
+
+  /* Typography Colors */
+  --color-text-main: #0f172a;         /* High contrast slate 900 */
+  --color-text-muted: #475569;        /* Slate 600 */
+  --color-text-subtle: #64748b;       /* Slate 500 */
+  --color-eyebrow: #0d9488;
 
   /* Status Colors */
-  --color-status-received-bg: #f1eee6;
-  --color-status-received-text: #76613a;
-  --color-status-confirmed-bg: #e3eef9;
-  --color-status-confirmed-text: #276394;
-  --color-status-doing-bg: #f8e6cc;
-  --color-status-doing-text: #9a5912;
-  --color-status-done-bg: #dff1e5;
-  --color-status-done-text: #27734c;
-  --color-status-delivered-bg: #d9ece5;
-  --color-status-delivered-text: #15523d;
+  --color-status-received-bg: #f1f5f9;
+  --color-status-received-text: #475569;
+  --color-status-confirmed-bg: #eff6ff;
+  --color-status-confirmed-text: #1d4ed8;
+  --color-status-doing-bg: #fffbeb;
+  --color-status-doing-text: #b45309;
+  --color-status-done-bg: #ecfdf5;
+  --color-status-done-text: #047857;
+  --color-status-delivered-bg: #f0fdf4;
+  --color-status-delivered-text: #15803d;
 
-  --color-error: #b3261e;
-  --color-accent-amber: #df9c36;
+  --color-error: #dc2626;
+  --color-accent-amber: #d97706;
 
   /* Ratings & Glow */
   --color-gold: #f59e0b;
   --color-gold-hover: #d97706;
   --color-gold-light: #fef3c7;
-  --color-gold-glow: rgba(245, 158, 11, 0.25);
+  --color-gold-glow: rgba(245, 158, 11, 0.2);
 
-  /* Typography */
-  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-serif: 'Playfair Display', Georgia, serif;
+  /* Modern Professional Typography */
+  --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'DM Mono', monospace;
 
-  /* Shadows & Transitions */
-  --shadow-sm: 0 2px 8px rgba(21, 60, 41, 0.06);
-  --shadow-md: 0 4px 16px rgba(21, 60, 41, 0.08);
-  --shadow-card: 0 3px 14px rgba(21, 60, 41, 0.06);
-  --shadow-dialog: 0 12px 36px rgba(21, 60, 41, 0.12);
-  --transition-fast: 0.15s ease;
+  /* Sophisticated Elevating Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+  --shadow-hover: 0 10px 25px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+  --shadow-dialog: 0 20px 25px -5px rgba(15, 23, 42, 0.15), 0 8px 10px -6px rgba(15, 23, 42, 0.1);
+  --transition-fast: 0.18s cubic-bezier(0.16, 1, 0.3, 1);
 }

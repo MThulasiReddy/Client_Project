@@ -10,8 +10,8 @@ export function AuthPage() {
   const [submitting, setSubmitting] = useState(false);
   const [announcement, setAnnouncement] = useState({
     title: 'PROVEN TRACK RECORD',
-    text: 'We did 100+ projects as of now, 200+ clients satisfied across colleges!',
-    stats_badge: '100+ Projects Completed · 200+ Satisfied Students',
+    text: 'We did 70+ projects as of now, worked with 110+ clients across colleges!',
+    stats_badge: 'Projects at Affordable Price 😍',
   });
 
   useEffect(() => {

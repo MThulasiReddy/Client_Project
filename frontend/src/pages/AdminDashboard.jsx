@@ -4,6 +4,7 @@ import { Footer } from '../components/common/Footer';
 import { RequestRow } from '../components/admin/RequestRow';
 import { RequestDetail } from '../components/admin/RequestDetail';
 import { AnnouncementModal } from '../components/admin/AnnouncementModal';
+import { ApplyDailyView } from '../components/placement/ApplyDailyView';
 import { projectsApi } from '../services/api';
 import { connectProjectSocket } from '../services/websocket';
 import { useAuth } from '../context/AuthContext';
@@ -55,47 +56,53 @@ export function AdminDashboard({ currentView, setView }) {
       />
 
       <main className="dashboard">
-        <div className="intro admin-intro-row">
-          <div>
-            <p className="eyebrow">OPERATIONS</p>
-            <h1>Admin Workspace</h1>
-            <p>
-              {requests.length} student {requests.length === 1 ? 'request' : 'requests'} currently in
-              the pipeline.
-            </p>
-          </div>
+        {currentView === 'apply-daily' ? (
+          <ApplyDailyView user={user} />
+        ) : (
+          <>
+            <div className="intro admin-intro-row">
+              <div>
+                <p className="eyebrow">OPERATIONS</p>
+                <h1>Admin Workspace</h1>
+                <p>
+                  {requests.length} student {requests.length === 1 ? 'request' : 'requests'} currently in
+                  the pipeline.
+                </p>
+              </div>
 
-          <button
-            type="button"
-            className="btn-edit-announcement"
-            onClick={() => setIsAnnouncementModalOpen(true)}
-            title="Configure the announcement card shown on the hero section"
-          >
-            📢 Edit Hero Announcement
-          </button>
-        </div>
+              <button
+                type="button"
+                className="btn-edit-announcement"
+                onClick={() => setIsAnnouncementModalOpen(true)}
+                title="Configure the announcement card shown on the hero section"
+              >
+                📢 Edit Hero Announcement
+              </button>
+            </div>
 
-        <div className="admin-grid">
-          <section className="panel requests">
-            <h2>All Requests</h2>
-            {loading ? (
-              <div style={{ padding: '24px', color: '#64746d' }}>Loading requests…</div>
-            ) : requests.length > 0 ? (
-              requests.map((req) => (
-                <RequestRow
-                  key={req.id}
-                  project={req}
-                  isSelected={selectedRequest?.id === req.id}
-                  onSelect={setSelectedRequest}
-                />
-              ))
-            ) : (
-              <div style={{ padding: '24px', color: '#64746d' }}>No project requests found.</div>
-            )}
-          </section>
+            <div className="admin-grid">
+              <section className="panel requests">
+                <h2>All Requests</h2>
+                {loading ? (
+                  <div style={{ padding: '24px', color: '#64746d' }}>Loading requests…</div>
+                ) : requests.length > 0 ? (
+                  requests.map((req) => (
+                    <RequestRow
+                      key={req.id}
+                      project={req}
+                      isSelected={selectedRequest?.id === req.id}
+                      onSelect={setSelectedRequest}
+                    />
+                  ))
+                ) : (
+                  <div style={{ padding: '24px', color: '#64746d' }}>No project requests found.</div>
+                )}
+              </section>
 
-          <RequestDetail project={selectedRequest} onUpdated={loadRequests} />
-        </div>
+              <RequestDetail project={selectedRequest} onUpdated={loadRequests} />
+            </div>
+          </>
+        )}
       </main>
 
       <AnnouncementModal

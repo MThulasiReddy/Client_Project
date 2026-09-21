@@ -25,6 +25,25 @@ export const CATEGORIES = [
   { value: 'other', label: 'Other' },
 ];
 
+export const DEPARTMENTS = [
+  { value: 'all', label: 'All Departments' },
+  { value: 'cse', label: 'CSE', full: 'Computer Science & Engineering' },
+  { value: 'ece', label: 'ECE', full: 'Electronics & Communication' },
+  { value: 'it', label: 'IT', full: 'Information Technology' },
+  { value: 'eee', label: 'EEE', full: 'Electrical & Electronics' },
+];
+
+export function formatDate(dateString) {
+  if (!dateString) return null;
+  const d = new Date(dateString);
+  if (isNaN(d.getTime())) return dateString;
+  return d.toLocaleDateString(undefined, {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
+}
+
 export function formatDateTime(isoString) {
   if (!isoString) return null;
   const d = new Date(isoString);
@@ -38,3 +57,4 @@ export function formatDateTime(isoString) {
     hour12: true,
   });
 }
+

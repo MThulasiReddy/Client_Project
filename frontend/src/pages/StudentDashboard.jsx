@@ -5,6 +5,7 @@ import { Footer } from '../components/common/Footer';
 import { ProjectCard } from '../components/student/ProjectCard';
 import { NewRequestForm } from '../components/student/NewRequestForm';
 import { FeedbackModal } from '../components/student/FeedbackModal';
+import { ApplyDailyView } from '../components/placement/ApplyDailyView';
 import { projectsApi } from '../services/api';
 import { connectProjectSocket } from '../services/websocket';
 import { useAuth } from '../context/AuthContext';
@@ -74,7 +75,9 @@ export function StudentDashboard({ currentView, setView }) {
           <p>Track your active requests and monitor live milestone progress.</p>
         </div>
 
-        {currentView === 'new' ? (
+        {currentView === 'apply-daily' ? (
+          <ApplyDailyView user={user} />
+        ) : currentView === 'new' ? (
           <NewRequestForm
             onCreated={handleProjectCreated}
             onCancel={() => setView('projects')}

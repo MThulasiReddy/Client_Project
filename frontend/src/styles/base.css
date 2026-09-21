@@ -6,8 +6,14 @@ body {
   margin: 0;
   font-family: var(--font-sans);
   color: var(--color-text-main);
-  background: var(--color-bg);
+  background-color: var(--color-bg);
+  background-image: 
+    radial-gradient(at 10% 10%, rgba(15, 118, 110, 0.03) 0px, transparent 50%),
+    radial-gradient(at 90% 20%, rgba(59, 130, 246, 0.03) 0px, transparent 50%),
+    radial-gradient(at 50% 90%, rgba(20, 184, 166, 0.02) 0px, transparent 50%);
+  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 button,
@@ -137,9 +143,11 @@ textarea {
 
 /* Common Header */
 header {
-  height: 76px;
-  border-bottom: 1px solid var(--color-border);
-  background: #fff;
+  height: 72px;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   display: flex;
   align-items: center;
   padding: 0 max(24px, 6vw);
@@ -149,6 +157,7 @@ header {
   z-index: 50;
   width: 100%;
   box-sizing: border-box;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.02);
 }
 
 .mainnav {

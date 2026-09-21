@@ -1,17 +1,19 @@
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
+from django.db import models
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import ProjectRequest, HeroAnnouncement
+from .models import ProjectRequest, HeroAnnouncement, PlacementCompanyLink, StudentJobApplication
 from .serializers import (
     ProjectRequestSerializer,
     AdminProjectSerializer,
     FeedbackSubmissionSerializer,
     HeroAnnouncementSerializer,
+    PlacementCompanyLinkSerializer,
 )
 from accounts.models import StudentProfile
 
@@ -119,3 +121,80 @@ class HeroAnnouncementView(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
+
+
+class PlacementCompanyLinkListCreateView(generics.ListCreateAPIView):
+    serializer_class = PlacementCompanyLinkSerializer
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return [permissions.IsAuthenticated()]
+        return [permissions.IsAdminUser()]
+
+    def get_queryset(self):
+        dept = self.request.query_params.get('department')
+        search = self.request.query_params.get('search')
+        queryset = PlacementCompanyLink.objects.all()
+
+        if dept and dept.lower() != 'all':
+            queryset = queryset.filter(department=dept.lower())
+
+        if search:
+            queryset = queryset.filter(
+                models.Q(company_name__icontains=search)
+                | models.Q(role_title__icontains=search)
+                | models.Q(location__icontains=search)
+            )
+        return queryset
+
+
+class PlacementCompanyLinkDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = PlacementCompanyLink.objects.all()
+    serializer_class = PlacementCompanyLinkSerializer
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return [permissions.IsAuthenticated()]
+        return [permissions.IsAdminUser()]
+
+
+class ToggleJobAppliedView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, pk):
+        company_link = get_object_or_404(PlacementCompanyLink, pk=pk)
+        existing_app = StudentJobApplication.objects.filter(
+            student=request.user, company_link=company_link
+        ).first()
+
+        if existing_app:
+            existing_app.delete()
+            applied = False
+        else:
+            StudentJobApplication.objects.create(
+                student=request.user, company_link=company_link
+            )
+            applied = True
+
+        serializer = PlacementCompanyLinkSerializer(company_link, context={'request': request})
+        return Response({
+            'applied': applied,
+            'company': serializer.data,
+            'message': 'Marked as applied' if applied else 'Removed applied status',
+        }, status=status.HTTP_200_OK)
+
+
+class TrackCompanyClickView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, pk):
+        company_link = get_object_or_404(PlacementCompanyLink, pk=pk)
+        PlacementCompanyLink.objects.filter(pk=pk).update(click_count=models.F('click_count') + 1)
+        company_link.refresh_from_db()
+        serializer = PlacementCompanyLinkSerializer(company_link, context={'request': request})
+        return Response({
+            'click_count': company_link.click_count,
+            'company': serializer.data,
+        }, status=status.HTTP_200_OK)
+
+

@@ -32,12 +32,20 @@ export function Header({ user, currentView, onNavigate, onLogout }) {
       {/* Desktop nav — hidden on mobile via CSS */}
       <nav className="mainnav">
         {user?.is_staff ? (
-          <button
-            className={currentView === 'admin' ? 'active' : ''}
-            onClick={() => navigate('admin')}
-          >
-            ⚙ Admin Workspace
-          </button>
+          <>
+            <button
+              className={currentView === 'admin' ? 'active' : ''}
+              onClick={() => navigate('admin')}
+            >
+              ⚙ Admin Workspace
+            </button>
+            <button
+              className={currentView === 'apply-daily' ? 'active' : ''}
+              onClick={() => navigate('apply-daily')}
+            >
+              💼 Apply Daily
+            </button>
+          </>
         ) : (
           <>
             <button
@@ -45,6 +53,13 @@ export function Header({ user, currentView, onNavigate, onLogout }) {
               onClick={() => navigate('projects')}
             >
               My Projects
+            </button>
+
+            <button
+              className={currentView === 'apply-daily' ? 'active' : ''}
+              onClick={() => navigate('apply-daily')}
+            >
+              💼 Apply Daily
             </button>
 
             <button className="requestnav" onClick={() => navigate('new')}>
@@ -80,12 +95,20 @@ export function Header({ user, currentView, onNavigate, onLogout }) {
       {mobileMenuOpen && (
         <div className="mobile-menu" ref={menuRef}>
           {user?.is_staff ? (
-            <button
-              className={`mobile-nav-btn admin-nav-btn ${currentView === 'admin' ? 'active' : ''}`}
-              onClick={() => navigate('admin')}
-            >
-              ⚙ Admin Workspace
-            </button>
+            <>
+              <button
+                className={`mobile-nav-btn admin-nav-btn ${currentView === 'admin' ? 'active' : ''}`}
+                onClick={() => navigate('admin')}
+              >
+                ⚙ Admin Workspace
+              </button>
+              <button
+                className={`mobile-nav-btn ${currentView === 'apply-daily' ? 'active' : ''}`}
+                onClick={() => navigate('apply-daily')}
+              >
+                💼 Apply Daily
+              </button>
+            </>
           ) : (
             <>
               <button
@@ -93,6 +116,13 @@ export function Header({ user, currentView, onNavigate, onLogout }) {
                 onClick={() => navigate('projects')}
               >
                 📁 My Projects
+              </button>
+
+              <button
+                className={`mobile-nav-btn ${currentView === 'apply-daily' ? 'active' : ''}`}
+                onClick={() => navigate('apply-daily')}
+              >
+                💼 Apply Daily
               </button>
 
               <button

@@ -87,3 +87,37 @@ export const projectsApi = {
       body: JSON.stringify(updates),
     }),
 };
+
+// Placement Companies API
+export const placementApi = {
+  list: (department = '', search = '') => {
+    const params = new URLSearchParams();
+    if (department && department !== 'all') params.append('department', department);
+    if (search) params.append('search', search);
+    const queryString = params.toString();
+    return apiRequest(`/projects/placement-links/${queryString ? `?${queryString}` : ''}`);
+  },
+  create: (data) =>
+    apiRequest('/projects/placement-links/', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  update: (id, data) =>
+    apiRequest(`/projects/placement-links/${id}/`, {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+    }),
+  delete: (id) =>
+    apiRequest(`/projects/placement-links/${id}/`, {
+      method: 'DELETE',
+    }),
+  toggleApplied: (id) =>
+    apiRequest(`/projects/placement-links/${id}/toggle-apply/`, {
+      method: 'POST',
+    }),
+  trackClick: (id) =>
+    apiRequest(`/projects/placement-links/${id}/track-click/`, {
+      method: 'POST',
+    }),
+};
+

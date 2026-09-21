@@ -68,3 +68,54 @@ class HeroAnnouncement(models.Model):
 
     def __str__(self):
         return f"Hero Announcement: {self.text[:40]}"
+
+
+class PlacementCompanyLink(models.Model):
+    class Department(models.TextChoices):
+        ECE = 'ece', 'ECE (Electronics & Communication)'
+        CSE = 'cse', 'CSE (Computer Science)'
+        IT = 'it', 'IT (Information Technology)'
+        EEE = 'eee', 'EEE (Electrical & Electronics)'
+
+    department = models.CharField(max_length=10, choices=Department.choices)
+    company_name = models.CharField(max_length=200)
+    role_title = models.CharField(max_length=200)
+    job_type = models.CharField(max_length=80, default='Full-time')
+    apply_link = models.URLField(max_length=500)
+    deadline = models.DateField(null=True, blank=True)
+    batch_eligibility = models.CharField(max_length=120, blank=True)
+    salary_or_stipend = models.CharField(max_length=120, blank=True)
+    location = models.CharField(max_length=150, blank=True)
+    description = models.TextField(blank=True)
+    click_count = models.PositiveIntegerField(default=0)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['deadline', '-created_at']
+
+    def __str__(self):
+        return f"[{self.department.upper()}] {self.company_name} - {self.role_title}"
+
+
+class StudentJobApplication(models.Model):
+    student = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='job_applications',
+    )
+    company_link = models.ForeignKey(
+        PlacementCompanyLink,
+        on_delete=models.CASCADE,
+        related_name='student_applications',
+    )
+    applied_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('student', 'company_link')
+        ordering = ['-applied_at']
+
+    def __str__(self):
+        return f"{self.student.email} applied to {self.company_link.company_name}"
+

@@ -15,12 +15,12 @@ export function AnnouncementModal({ isOpen, onClose, onSaved }) {
       projectsApi
         .getAnnouncement()
         .then((data) => {
-          setTitle(data.title || 'PROVEN TRACK RECORD');
+          setTitle(data.title || '');
           setText(
-            data.text || 'We did 100+ projects as of now, 200+ clients satisfied across colleges!'
+            data.text || ''
           );
           setStatsBadge(
-            data.stats_badge || '100+ Projects Completed · 200+ Satisfied Students'
+            data.stats_badge || ''
           );
         })
         .catch((err) => {
