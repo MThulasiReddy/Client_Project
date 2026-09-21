@@ -7,7 +7,7 @@ body {
   font-family: var(--font-sans);
   color: var(--color-text-main);
   background-color: var(--color-bg);
-  background-image: 
+  background-image:
     radial-gradient(at 10% 10%, rgba(15, 118, 110, 0.03) 0px, transparent 50%),
     radial-gradient(at 90% 20%, rgba(59, 130, 246, 0.03) 0px, transparent 50%),
     radial-gradient(at 50% 90%, rgba(20, 184, 166, 0.02) 0px, transparent 50%);
@@ -49,13 +49,13 @@ a {
 }
 
 .logo {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--color-primary-dark);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .eyebrow {
@@ -323,6 +323,7 @@ header {
     opacity: 0;
     transform: translateY(-8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -668,6 +669,7 @@ header {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -677,6 +679,7 @@ header {
   from {
     transform: rotate(360deg);
   }
+
   to {
     transform: rotate(0deg);
   }
@@ -687,6 +690,7 @@ header {
     transform: scale(0.96);
     box-shadow: 0 0 16px rgba(52, 211, 153, 0.4);
   }
+
   100% {
     transform: scale(1.04);
     box-shadow: 0 0 28px rgba(52, 211, 153, 0.85);
@@ -698,6 +702,7 @@ header {
     transform: scale(0.85);
     opacity: 0.8;
   }
+
   100% {
     transform: scale(1.45);
     opacity: 0;
@@ -708,6 +713,7 @@ header {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -718,6 +724,7 @@ header {
     opacity: 0;
     transform: translateY(12px) scale(0.98);
   }
+
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -773,10 +780,12 @@ header {
 }
 
 @keyframes heartBeat {
+
   0%,
   100% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.18);
   }
