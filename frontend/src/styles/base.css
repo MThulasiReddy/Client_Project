@@ -194,6 +194,43 @@ header {
   background: var(--color-primary-hover);
 }
 
+/* Mobile inline nav — hidden on desktop, shown on mobile */
+.mobile-inline-nav {
+  display: none;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+.mobile-inline-btn {
+  background: transparent;
+  color: #50625a;
+  padding: 7px 10px;
+  border: 1px solid transparent;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.mobile-inline-btn:hover,
+.mobile-inline-btn.active {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  border-color: var(--color-primary-border);
+}
+
+.mobile-inline-btn.highlight {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+  box-shadow: 0 2px 6px rgba(25, 91, 67, 0.18);
+}
+
+.mobile-inline-btn.highlight:hover {
+  background: var(--color-primary-hover);
+}
+
 /* Hamburger button — shown on mobile only */
 .hamburger-btn {
   display: none;
@@ -241,7 +278,7 @@ header {
 /* Mobile dropdown menu */
 .mobile-menu {
   position: absolute;
-  top: 76px;
+  top: 72px;
   left: 0;
   right: 0;
   background: #ffffff;
@@ -252,6 +289,33 @@ header {
   flex-direction: column;
   padding: 8px;
   animation: slideDown 0.2s ease-out;
+}
+
+/* Account-only dropdown: right-aligned, auto width */
+.mobile-menu-account {
+  left: auto;
+  right: 12px;
+  min-width: 200px;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  border-bottom-width: 1px;
+  top: 68px;
+}
+
+.mobile-menu-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px 6px;
+}
+
+.mobile-menu-username {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 @keyframes slideDown {
@@ -720,24 +784,47 @@ header {
 
 @media (max-width: 768px) {
   header {
-    padding: 0 16px;
-    gap: 12px;
+    padding: 0 12px;
+    gap: 6px;
     position: relative;
   }
 
+  /* Hide desktop nav */
   .mainnav {
     display: none;
   }
 
-  .user {
-    margin-left: auto;
+  /* Show mobile inline nav */
+  .mobile-inline-nav {
+    display: flex;
+    flex: 1;
+    overflow-x: auto;
+    /* hide scrollbar but allow scroll if buttons overflow */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
-  /* Show hamburger, hide the full user name text on small screens */
+  .mobile-inline-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Keep user section tight: just avatar + hamburger */
+  .user {
+    margin-left: 0;
+    flex-shrink: 0;
+    gap: 6px;
+  }
+
+  /* Hide name and logout button — they go into the dropdown */
   .user-name-label {
     display: none;
   }
 
+  .logout {
+    display: none;
+  }
+
+  /* Show hamburger */
   .hamburger-btn {
     display: flex;
     align-items: center;
