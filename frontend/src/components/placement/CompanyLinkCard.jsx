@@ -80,8 +80,8 @@ export function CompanyLinkCard({ company, isAdmin, onEdit, onDelete, onToggleAp
         {/* Live VEMU Competition / Activity Counter */}
         <div className="competition-meter">
           <div className="competition-stats">
-            <span className="competition-tag" title="VEMU students who clicked to apply" >
-              🔥 <strong>{click_count || 0}</strong> VEMU{' '}
+            <span className="competition-tag" title="students who clicked to apply" >
+              🔥 <strong>{click_count || 0}</strong> {' '}
                   {click_count === 1 ? 'student' : 'students'} Clicked/Applied
             </span>
           </div>
