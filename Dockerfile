@@ -5,12 +5,16 @@ FROM node:22-alpine AS frontend
 
 WORKDIR /app/frontend
 
+# Copy package files first for better Docker layer caching
 COPY frontend/package*.json ./
 
+# Install frontend dependencies
 RUN npm ci
 
+# Copy frontend source
 COPY frontend/ ./
 
+# Build React/Vite production files
 RUN npm run build
 
 
@@ -24,22 +28,34 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app/backend
 
+# ------------------------------------------------------------
 # Install Python dependencies
+# ------------------------------------------------------------
 COPY backend/requirements.txt ./
 
 RUN pip install --no-cache-dir -r requirements.txt
 
+# ------------------------------------------------------------
 # Copy Django backend
+# ------------------------------------------------------------
 COPY backend/ ./
 
-# Copy built frontend into Django project
+# ------------------------------------------------------------
+# Copy React/Vite production build into Django project
+# ------------------------------------------------------------
 COPY --from=frontend /app/frontend/dist ./frontend_dist
 
-# Collect static files
+# ------------------------------------------------------------
+# Collect Django static files
+# ------------------------------------------------------------
 RUN python manage.py collectstatic --noinput
 
+# ------------------------------------------------------------
 # Make startup script executable
+# ------------------------------------------------------------
 RUN chmod +x start.sh
 
+# ------------------------------------------------------------
 # Start Django + migrations + admin creation + Daphne
+# ------------------------------------------------------------
 CMD ["./start.sh"]
